@@ -50,7 +50,7 @@
           </button>
           <button class="filter-icon-btn" aria-label="Filter options">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-              <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+              <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
             </svg>
           </button>
         </div>
@@ -82,21 +82,26 @@
           <div class="product-body">
             <div class="badge-row">
               <!-- Category Badge -->
-              <span class="badge-vintage" [class.badge-green]="product.category === 'ปุ๋ยอินทรีย์'" [class.badge-blue]="product.category === 'ปุ๋ยเคมี'" [class.badge-yellow]="product.category !== 'ปุ๋ยอินทรีย์' && product.category !== 'ปุ๋ยเคมี'">{{ product.category }}</span>
+              <span class="badge-vintage" [class.badge-green]="product.category === 'ปุ๋ยอินทรีย์'"
+                [class.badge-blue]="product.category === 'ปุ๋ยเคมี'"
+                [class.badge-yellow]="product.category !== 'ปุ๋ยอินทรีย์' && product.category !== 'ปุ๋ยเคมี'">{{
+                product.category }}</span>
             </div>
-            
+
             <h3 class="product-name-vintage">{{ product.name }}</h3>
-            
-            <p class="product-desc-vintage">{{ product.description || 'ปุ๋ยคุณภาพสูง ช่วยบำรุงพืชผลและปรับปรุงดินให้ดียิ่งขึ้น' }}</p>
-            
+
+            <p class="product-desc-vintage">{{ product.description || 'ปุ๋ยคุณภาพสูง
+              ช่วยบำรุงพืชผลและปรับปรุงดินให้ดียิ่งขึ้น' }}</p>
+
             <div class="product-footer-vintage">
               <div class="product-price-vintage">{{ formatPrice(product.price) }}</div>
               <div class="product-stock-vintage" [class.out]="product.stock === 0">
                 {{ product.stock > 0 ? 'สินค้า (' + product.stock + ')' : 'สินค้าหมด' }}
               </div>
             </div>
-            
-            <button class="add-btn-vintage" [class.added]="addedId === product.id" [disabled]="product.stock === 0" (click)="addToCart(product)"></button>
+
+            <button class="add-btn-vintage" [class.added]="addedId === product.id" [disabled]="product.stock === 0"
+              (click)="addToCart(product)"></button>
           </div>
         </div>
       </div>
@@ -118,14 +123,8 @@
     <div class="map-content">
       <!-- แผนที่ -->
       <div class="map-embed-wrapper">
-        <iframe
-          src="https://maps.google.com/maps?q=GRTfP6X7iucaguCL9&output=embed&z=16"
-          width="100%"
-          height="100%"
-          style="border:0;"
-          allowfullscreen
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
+        <iframe src="https://maps.google.com/maps?q=GRTfP6X7iucaguCL9&output=embed&z=16" width="100%" height="100%"
+          style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           title="แผนที่ร้านปุ๋ยชาวนา">
         </iframe>
       </div>
@@ -143,7 +142,7 @@
           <div class="info-icon">📞</div>
           <div>
             <div class="info-label">โทรศัพท์</div>
-            <div class="info-value">089-xxx-xxxx</div>
+            <div class="info-value">095-273-4648</div>
           </div>
         </div>
         <div class="info-card">
@@ -160,10 +159,7 @@
             <div class="info-value">จ่ายเงินหน้างาน<br>โอนผ่านบัญชีธนาคาร</div>
           </div>
         </div>
-        <a
-          href="https://maps.app.goo.gl/GRTfP6X7iucaguCL9"
-          target="_blank"
-          rel="noopener noreferrer"
+        <a href="https://maps.app.goo.gl/GRTfP6X7iucaguCL9" target="_blank" rel="noopener noreferrer"
           class="map-open-btn">
           🗺️ เปิดใน Google Maps
         </a>

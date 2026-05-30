@@ -15,9 +15,9 @@ export class SeedService implements OnApplicationBootstrap {
   async onApplicationBootstrap() {
     const adminCount = await this.adminRepo.count();
     if (adminCount === 0) {
-      const passwordHash = await bcrypt.hash('admin123', 10);
+      const passwordHash = await bcrypt.hash('admin007', 10);
       await this.adminRepo.save({ username: 'admin', passwordHash });
-      console.log('✅ Admin seeded: admin / admin123');
+      console.log('✅ Admin seeded: admin / admin007');
     }
 
     const productCount = await this.productRepo.count();
