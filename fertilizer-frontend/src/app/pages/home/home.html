@@ -1,0 +1,177 @@
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-icon">🌿</span>
+      <div>
+        <div class="logo-title">ร้านปุ๋ยชาวนา</div>
+        <div class="logo-sub">ปุ๋ยคุณภาพ ราคายุติธรรม</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="header-vintage-btn cart-vintage-btn" (click)="goToCart()">
+        <img src="/images/8.png" class="header-btn-img" alt="ตะกร้า">
+        <span class="cart-badge-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+      </button>
+      <button class="header-vintage-btn admin-vintage-btn" (click)="goToAdmin()">
+        <img src="/images/7.png" class="header-btn-img" alt="เข้าสู่ระบบ">
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Wood Background wrapper and large Central Parchment wrapper for catalog -->
+<div class="home-page-bg">
+  <div class="catalog-content-wrapper">
+    <!-- 📢 ส่วนแสดงข่าวประชาสัมพันธ์ & โปรโมชั่นล่าสุดหน้าร้าน -->
+    <div class="promotions-section" *ngIf="activePromotions.length > 0">
+      <div class="promo-banner fade-in" *ngFor="let p of activePromotions">
+        <div class="promo-icon">
+          <img src="/images/6-removebg-preview.png" class="promo-icon-img" alt="📢">
+        </div>
+        <div class="promo-content">
+          <span class="promo-badge">ข่าวสาร / โปรโมชั่นแนะนำ</span>
+          <h3 class="promo-title">{{ p.title }}</h3>
+          <p class="promo-desc">{{ p.content }}</p>
+        </div>
+      </div>
+    </div>
+
+    <main class="main">
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input class="search-input" type="text" placeholder="ค้นหาสินค้า..." [(ngModel)]="search"
+            (ngModelChange)="filterProducts()">
+        </div>
+        <div class="categories">
+          <button *ngFor="let cat of categories" class="cat-btn" [class.active]="selectedCategory === cat"
+            (click)="setCategory(cat)">
+            {{ cat }}
+          </button>
+          <button class="filter-icon-btn" aria-label="Filter options">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+              <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>กำลังโหลดสินค้า...</p>
+      </div>
+
+      <div *ngIf="!loading && filtered.length === 0" class="empty-state">
+        <div class="empty-icon">🌱</div>
+        <p>ไม่พบสินค้าที่ค้นหา</p>
+      </div>
+
+      <div class="products-grid" *ngIf="!loading">
+        <div class="product-card fade-in" *ngFor="let product of filtered">
+          <!-- Pure CSS Top Decorative Curved Area -->
+          <div class="product-card-header"></div>
+
+          <!-- Center Product Circular Frame -->
+          <div class="product-img-container">
+            <div class="product-circle">
+              <img [src]="getProductImage(product)" class="product-img-real" alt="{{ product.name }}">
+            </div>
+          </div>
+
+          <!-- Card Contents -->
+          <div class="product-body">
+            <div class="badge-row">
+              <!-- Category Badge -->
+              <span class="badge-vintage" [class.badge-green]="product.category === 'ปุ๋ยอินทรีย์'" [class.badge-blue]="product.category === 'ปุ๋ยเคมี'" [class.badge-yellow]="product.category !== 'ปุ๋ยอินทรีย์' && product.category !== 'ปุ๋ยเคมี'">{{ product.category }}</span>
+            </div>
+            
+            <h3 class="product-name-vintage">{{ product.name }}</h3>
+            
+            <p class="product-desc-vintage">{{ product.description || 'ปุ๋ยคุณภาพสูง ช่วยบำรุงพืชผลและปรับปรุงดินให้ดียิ่งขึ้น' }}</p>
+            
+            <div class="product-footer-vintage">
+              <div class="product-price-vintage">{{ formatPrice(product.price) }}</div>
+              <div class="product-stock-vintage" [class.out]="product.stock === 0">
+                {{ product.stock > 0 ? 'สินค้า (' + product.stock + ')' : 'สินค้าหมด' }}
+              </div>
+            </div>
+            
+            <button class="add-btn-vintage" [class.added]="addedId === product.id" [disabled]="product.stock === 0" (click)="addToCart(product)"></button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- 📍 ส่วนแผนที่และข้อมูลร้าน -->
+<section class="map-section">
+  <div class="map-section-inner">
+    <div class="map-header">
+      <span class="map-icon">📍</span>
+      <div>
+        <h2 class="map-title">ที่ตั้งร้านของเรา</h2>
+        <p class="map-subtitle">ยินดีต้อนรับลูกค้าทุกท่าน</p>
+      </div>
+    </div>
+
+    <div class="map-content">
+      <!-- แผนที่ -->
+      <div class="map-embed-wrapper">
+        <iframe
+          src="https://maps.google.com/maps?q=GRTfP6X7iucaguCL9&output=embed&z=16"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="แผนที่ร้านปุ๋ยชาวนา">
+        </iframe>
+      </div>
+
+      <!-- ข้อมูลติดต่อ -->
+      <div class="map-info">
+        <div class="info-card">
+          <div class="info-icon">🏪</div>
+          <div>
+            <div class="info-label">ชื่อร้าน</div>
+            <div class="info-value">ร้านปุ๋ยชาวนา</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label">โทรศัพท์</div>
+            <div class="info-value">089-xxx-xxxx</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🕐</div>
+          <div>
+            <div class="info-label">เวลาทำการ</div>
+            <div class="info-value">จันทร์ – เสาร์<br>08:00 – 17:00 น.</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">💳</div>
+          <div>
+            <div class="info-label">การชำระเงิน</div>
+            <div class="info-value">จ่ายเงินหน้างาน<br>โอนผ่านบัญชีธนาคาร</div>
+          </div>
+        </div>
+        <a
+          href="https://maps.app.goo.gl/GRTfP6X7iucaguCL9"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="map-open-btn">
+          🗺️ เปิดใน Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>© 2024 ร้านปุ๋ยชาวนา | จ่ายเงินหน้างาน | ☎ 089-xxx-xxxx</p>
+</footer>

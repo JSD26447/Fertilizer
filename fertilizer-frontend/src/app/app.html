@@ -1,0 +1,8 @@
+<div *ngFor="let product of products; let i = index">
+
+  <app-product-card [product]="product" (increase)="increaseStock(product)" (decrease)="decreaseStock(product)"
+    (delete)="deleteProduct(i)">
+
+  </app-product-card>
+
+</div>

@@ -1,0 +1,53 @@
+<div class="dash-page">
+  <div class="dash-header">
+    <h1 class="dash-title">📊 แดชบอร์ด</h1>
+    <p class="dash-sub">ภาพรวมร้านค้าวันนี้</p>
+  </div>
+
+  <div *ngIf="loading" class="loading"><div class="spinner"></div><p>กำลังโหลด...</p></div>
+
+  <div *ngIf="!loading && stats" class="fade-in">
+    <div class="stats-grid">
+      <div class="stat-card green">
+        <div class="stat-icon">🌿</div>
+        <div class="stat-val">{{ stats.totalProducts }}</div>
+        <div class="stat-label">สินค้าทั้งหมด</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-icon">📋</div>
+        <div class="stat-val">{{ stats.totalOrders }}</div>
+        <div class="stat-label">ออเดอร์ทั้งหมด</div>
+      </div>
+      <div class="stat-card yellow">
+        <div class="stat-icon">⏳</div>
+        <div class="stat-val">{{ stats.pendingOrders }}</div>
+        <div class="stat-label">รอดำเนินการ</div>
+      </div>
+      <div class="stat-card amber">
+        <div class="stat-icon">💰</div>
+        <div class="stat-val">{{ formatPrice(stats.totalRevenue) }}</div>
+        <div class="stat-label">รายได้รวม (จัดส่งแล้ว)</div>
+      </div>
+    </div>
+
+    <div class="recent-section card">
+      <h2 class="section-title">ออเดอร์ล่าสุด</h2>
+      <div *ngIf="stats.recentOrders.length === 0" class="empty">ยังไม่มีออเดอร์</div>
+      <table class="data-table" *ngIf="stats.recentOrders.length > 0">
+        <thead>
+          <tr><th>#</th><th>ลูกค้า</th><th>เบอร์โทร</th><th>ยอดรวม</th><th>สถานะ</th><th>วันที่</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let o of stats.recentOrders">
+            <td><strong>#{{ o.id }}</strong></td>
+            <td>{{ o.customerName }}</td>
+            <td>{{ o.customerPhone }}</td>
+            <td><strong>{{ formatPrice(o.totalPrice) }}</strong></td>
+            <td><span class="badge {{ getStatusClass(o.status) }}">{{ o.status }}</span></td>
+            <td>{{ o.createdAt | date:'dd/MM/yyyy HH:mm' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

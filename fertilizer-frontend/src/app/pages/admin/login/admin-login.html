@@ -1,0 +1,28 @@
+<div class="login-page">
+  <div class="login-card fade-in">
+    <div class="login-logo">
+      <span class="logo-icon">🌿</span>
+      <h1 class="logo-title">ระบบจัดการร้านปุ๋ย</h1>
+      <p class="logo-sub">เข้าสู่ระบบสำหรับแอดมิน</p>
+    </div>
+
+    <div class="error-msg" *ngIf="error">⚠️ {{ error }}</div>
+
+    <div class="form-group">
+      <label>ชื่อผู้ใช้</label>
+      <input id="login-username" class="form-control" type="text" placeholder="กรอกชื่อผู้ใช้" [(ngModel)]="username" (keyup.enter)="login()">
+    </div>
+    <div class="form-group">
+      <label>รหัสผ่าน</label>
+      <input id="login-password" class="form-control" type="password" placeholder="กรอกรหัสผ่าน" [(ngModel)]="password" (keyup.enter)="login()">
+    </div>
+
+    <button id="login-btn" class="btn btn-primary login-btn" [disabled]="loading" (click)="login()">
+      {{ loading ? '⏳ กำลังเข้าสู่ระบบ...' : '🔐 เข้าสู่ระบบ' }}
+    </button>
+
+    <div class="hint">
+      <p>ค่าเริ่มต้น: <strong>admin</strong> / <strong>admin123</strong></p>
+    </div>
+  </div>
+</div>

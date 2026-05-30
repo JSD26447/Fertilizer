@@ -1,0 +1,101 @@
+<div class="page-content">
+    <!-- 🌿 1. ส่วนหัวของหน้าจอ (Header) -->
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">📢 จัดการโปรโมชั่น & ข่าวสาร</h1>
+            <p class="page-sub">เพิ่ม แก้ไข หรือลบโปรโมชั่นสำหรับแสดงหน้าร้าน</p>
+        </div>
+        <!-- ปุ่มสำหรับกดเปิดแบบฟอร์มเพื่อสร้างโปรโมชั่นใหม่ -->
+        <button class="btn btn-primary" (click)="openAdd()">+ เพิ่มโปรโมชั่นใหม่</button>
+    </div>
+
+    <!-- ⏳ 2. ส่วนวงกลมหมุนตอนกำลังโหลดข้อมูล (Loading Spinner) -->
+    <div *ngIf="loading" class="loading">
+        <div class="spinner"></div>
+        <p>กำลังโหลดข้อมูลข่าวสาร...</p>
+    </div>
+
+    <!-- 📊 3. ตารางแสดงรายการโปรโมชั่นทั้งหมด (Data Table) -->
+    <div class="card table-card fade-in" *ngIf="!loading">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 80px;">#</th>
+                    <th>หัวข้อโปรโมชั่น</th>
+                    <th style="width: 150px; text-align: center;">สถานะ</th>
+                    <th style="width: 200px;">วันที่ลงข่าว</th>
+                    <th style="width: 200px; text-align: center;">จัดการ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ทำการวนลูปรายการโปรโมชั่นทั้งหมดในอาเรย์ -->
+                <tr *ngFor="let p of promotions">
+                    <td><strong>{{ p.id }}</strong></td>
+                    <td>
+                        <strong style="font-size: 16px; color: var(--text-primary);">{{ p.title }}</strong>
+                        <br>
+                        <span style="font-size: 13px; color: var(--text-secondary);">{{ p.content }}</span>
+                    </td>
+                    <!-- แสดงป้ายสีบอกสถานะ เปิดใช้งาน/ปิดใช้งาน -->
+                    <td style="text-align: center;">
+                        <span class="badge" [ngClass]="p.isActive ? 'badge-green' : 'badge-red'">
+                            {{ p.isActive ? '🟢 เปิดใช้งาน' : '🔴 ปิดใช้งาน' }}
+                        </span>
+                    </td>
+                    <!-- แปลงวันเวลาให้ออกมาเป็นฟอร์แมตภาษาไทยสวยงาม -->
+                    <td>{{ p.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+                    <!-- ปุ่มจัดการสำหรับการแก้ไขและลบข้อมูล -->
+                    <td class="actions" style="text-align: center; gap: 8px;">
+                        <button class="btn btn-outline btn-sm" (click)="openEdit(p)">✏️ แก้ไข</button>
+                        <button class="btn btn-danger btn-sm" (click)="delete(p.id!)">🗑️ ลบ</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- แสดงเมื่อไม่มีโปรโมชั่นอยู่ในระบบ -->
+        <div *ngIf="promotions.length === 0" class="empty">ยังไม่มีการประกาศโปรโมชั่นข่าวสารใดๆ</div>
+    </div>
+</div>
+
+<!-- 📦 4. หน้าจอเลื่อนขึ้นมาแก้ไขข้อมูล (Modal Box) -->
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+        <!-- หัวข้อหัวป๊อปอัพ เปลี่ยนแปลงตามโหมดแก้ไข/โหมดเพิ่มใหม่ -->
+        <div class="modal-header">
+            <h2>{{ editMode ? '✏️ แก้ไขข้อมูลโปรโมชั่น' : '📢 เพิ่มโปรโมชั่นใหม่' }}</h2>
+            <button class="close-btn" (click)="closeModal()">✕</button>
+        </div>
+
+        <!-- ฟอร์มกรอกรายละเอียด -->
+        <div class="modal-body">
+            <!-- หัวข้อข่าว -->
+            <div class="form-group">
+                <label>หัวข้อโปรโมชั่น *</label>
+                <input class="form-control" type="text" placeholder="พิมพ์หัวข้อโปรโมชั่น..." [(ngModel)]="form.title">
+            </div>
+
+            <!-- รายละเอียดโปรโมชั่น -->
+            <div class="form-group">
+                <label>รายละเอียดโปรโมชั่น</label>
+                <textarea class="form-control" rows="4" placeholder="พิมพ์รายละเอียดโปรโมชั่นข่าวสาร..."
+                    [(ngModel)]="form.content"></textarea>
+            </div>
+
+            <!-- กล่องเลือก ติ๊กเปิด/ปิด การใช้งานข่าวโปรโมชั่น -->
+            <div class="form-group" style="display: flex; align-items: center; gap: 8px; margin: 15px 0;">
+                <input type="checkbox" id="isActive" [(ngModel)]="form.isActive"
+                    style="width: 20px; height: 20px; cursor: pointer;">
+                <label for="isActive" style="margin: 0; cursor: pointer; font-weight: 500;">🟢
+                    เปิดแสดงให้ลูกค้าเห็นหน้าร้าน</label>
+            </div>
+        </div>
+
+        <!-- ปุ่มด้านล่างฟอร์ม ยกเลิก / บันทึก -->
+        <div class="modal-footer">
+            <button class="btn btn-outline" (click)="closeModal()">ยกเลิก</button>
+            <button class="btn btn-primary" [disabled]="saving || !form.title" (click)="save()">
+                {{ saving ? '⏳ กำลังบันทึก...' : '💾 บันทึกข้อมูล' }}
+            </button>
+        </div>
+    </div>
+</div>

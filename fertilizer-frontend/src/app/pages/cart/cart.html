@@ -1,0 +1,95 @@
+<div class="cart-page-bg">
+  <div class="page-wrapper">
+    <div class="page-header">
+      <button class="back-btn" (click)="goHome()">← กลับหน้าหลัก</button>
+      <h1 class="page-title">🛒 ตะกร้าสินค้า</h1>
+    </div>
+
+    <!-- Success State -->
+    <div class="success-card fade-in" *ngIf="success">
+      <div class="success-icon">✅</div>
+      <h2>สั่งซื้อสำเร็จ!</h2>
+      <p>หมายเลขออเดอร์: <strong>#{{ orderId }}</strong></p>
+      <p class="success-sub">กรุณาชำระเงินหน้างานเมื่อได้รับปุ๋ย</p>
+
+      <!-- 💬 ปุ่มติดตามออเดอร์ผ่านไลน์บอทสุดพรีเมียม -->
+      <div class="line-follow-container">
+        <a href="line://ti/p/@924bjdfx" class="line-follow-btn">
+          <span class="line-icon">💬</span> ติดตามสถานะออเดอร์ผ่าน LINE
+        </a>
+        <p class="line-help">คลิกแอดไลน์บอทร้านค้า เพื่อติดตามสถานะจัดส่งและคุยกับคุณ Art ได้ตลอด 24 ชม.</p>
+      </div>
+
+      <button class="btn btn-primary btn-lg mt-3" style="width: 100%;" (click)="goHome()">🛍️ ช้อปปิ้งต่อ</button>
+    </div>
+
+    <div class="success-card fade-in" *ngIf="!success && items.length === 0">
+      <div class="empty-icon">🛒</div>
+      <h3>ตะกร้าว่างเปล่า</h3>
+      <p>เลือกสินค้าที่ต้องการก่อนนะคะ</p>
+      <button class="btn btn-primary mt-2" style="background: linear-gradient(to bottom, #8c764e 0%, #6d5b3d 100%); border: 1px solid #5a4b32; color: #faf7ed;" (click)="goHome()">เลือกสินค้า</button>
+    </div>
+
+    <div *ngIf="!success && items.length > 0">
+      <div class="cart-layout">
+        <div class="cart-items card">
+          <h2 class="section-title">รายการสินค้า</h2>
+          <div class="cart-item" *ngFor="let item of items">
+            <div class="item-info">
+              <span class="item-emoji">🌿</span>
+              <div>
+                <div class="item-name">{{ item.productName }}</div>
+                <div class="item-price">{{ formatPrice(item.price) }} / ชิ้น</div>
+              </div>
+            </div>
+            <div class="item-qty">
+              <button class="qty-btn" (click)="updateQty(item.productId, item.quantity - 1)">−</button>
+              <span class="qty-val">{{ item.quantity }}</span>
+              <button class="qty-btn" (click)="updateQty(item.productId, item.quantity + 1)">+</button>
+            </div>
+            <div class="item-total">{{ formatPrice(item.price * item.quantity) }}</div>
+            <button class="remove-btn" (click)="remove(item.productId)">🗑️</button>
+          </div>
+          <div class="cart-total">
+            <span>รวมทั้งหมด</span>
+            <span class="total-price">{{ formatPrice(getTotal()) }}</span>
+          </div>
+        </div>
+
+        <div class="checkout-form card">
+          <h2 class="section-title">ข้อมูลผู้สั่งซื้อ</h2>
+          <div class="form-group">
+            <label>ชื่อ-นามสกุล *</label>
+            <input class="form-control" type="text" placeholder="กรอกชื่อของคุณ" [(ngModel)]="customerName">
+          </div>
+          <div class="form-group">
+            <label>เบอร์โทรศัพท์ *</label>
+            <input class="form-control" type="tel" placeholder="0xx-xxx-xxxx" [(ngModel)]="customerPhone">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>📅 วันที่นัดรับปุ๋ย *</label>
+              <input class="form-control" type="date" [(ngModel)]="pickupDate">
+            </div>
+            <div class="form-group">
+              <label>⏰ เวลานัดรับ *</label>
+              <input class="form-control" type="time" [(ngModel)]="pickupTime">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>หมายเหตุ (ถ้ามี)</label>
+            <textarea class="form-control" rows="3" placeholder="ระบุหมายเหตุเพิ่มเติม..." [(ngModel)]="note"></textarea>
+          </div>
+          <div class="pay-notice">
+            <span>💵</span>
+            <span>ชำระเงินหน้างาน เมื่อรับสินค้า</span>
+          </div>
+          <button class="checkout-btn-vintage" [disabled]="!canCheckout() || loading" (click)="checkout()">
+            <span *ngIf="loading">⏳ กำลังส่งออเดอร์...</span>
+            <span *ngIf="!loading">✅ ยืนยันคำสั่งซื้อ {{ formatPrice(getTotal()) }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

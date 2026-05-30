@@ -1,0 +1,111 @@
+/* พื้นหลังเว็บ */
+body {
+
+    background-color: #f5f5f5;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+
+/* หัวข้อ */
+h1 {
+
+    text-align: center;
+
+    color: green;
+
+    margin-bottom: 30px;
+
+}
+
+
+/* input */
+input {
+
+    padding: 10px;
+
+    width: 250px;
+
+    margin-right: 10px;
+
+    border-radius: 10px;
+
+    border: 1px solid gray;
+
+}
+
+
+/* card สินค้า */
+.product-card {
+
+    background-color: white;
+
+    padding: 20px;
+
+    margin-top: 20px;
+
+    border-radius: 15px;
+
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+
+/* ปุ่มทั้งหมด */
+button {
+
+    padding: 10px 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    color: white;
+
+    cursor: pointer;
+
+    margin-right: 5px;
+
+}
+
+
+/* ปุ่มเพิ่ม */
+.add-btn {
+
+    background-color: green;
+
+}
+
+
+/* ปุ่มลด */
+.minus-btn {
+
+    background-color: red;
+
+}
+
+
+/* ปุ่มลบสินค้า */
+.delete-btn {
+
+    background-color: darkred;
+
+}
+
+body {
+
+    background-color: #f5f5f5;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+
+h1 {
+
+    text-align: center;
+
+    color: green;
+
+}

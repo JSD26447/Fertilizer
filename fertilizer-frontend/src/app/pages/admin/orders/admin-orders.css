@@ -1,0 +1,325 @@
+.page-content { padding: 32px; }
+.page-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+.page-title { font-size: 28px; font-weight: 700; color: var(--primary-dark); }
+.page-sub { font-size: 14px; color: var(--text-secondary); margin-top: 4px; }
+.loading { text-align: center; padding: 60px; color: var(--text-muted); }
+.spinner { width: 36px; height: 36px; border: 4px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.filter-btn { padding: 7px 16px; border-radius: 20px; border: 2px solid var(--border); background: white; color: var(--text-secondary); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.filter-btn:hover { border-color: var(--primary-light); color: var(--primary); }
+.filter-btn.active { background: var(--primary); border-color: var(--primary); color: white; }
+
+.table-card { padding: 0; overflow: hidden; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.data-table th { text-align: left; padding: 12px 14px; background: var(--bg); color: var(--text-secondary); font-weight: 600; border-bottom: 2px solid var(--border); }
+.data-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.data-table tr:hover td { background: #f9fffe; }
+.link-btn { background: none; border: none; color: var(--primary); cursor: pointer; font-size: 13px; text-decoration: underline; }
+.status-select { padding: 6px 10px; border: 2px solid var(--border); border-radius: 8px; font-size: 13px; background: white; cursor: pointer; }
+.status-select:focus { border-color: var(--primary-light); }
+.empty { text-align: center; color: var(--text-muted); padding: 40px; }
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.modal-box { background: white; border-radius: var(--radius-lg); width: 100%; max-width: 580px; box-shadow: var(--shadow-lg); animation: fadeIn 0.25s ease; max-height: 90vh; overflow-y: auto; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: white; }
+.modal-header h2 { font-size: 18px; font-weight: 700; color: var(--primary-dark); }
+.close-btn { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--text-muted); }
+.modal-body { padding: 24px; }
+.order-meta { display: grid; gap: 10px; margin-bottom: 20px; background: var(--bg); padding: 16px; border-radius: var(--radius-sm); }
+.meta-item { display: flex; gap: 12px; font-size: 14px; }
+.meta-item label { font-weight: 600; color: var(--text-secondary); min-width: 90px; }
+.items-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.items-table th { text-align: left; padding: 10px 12px; background: var(--bg); color: var(--text-secondary); font-weight: 600; border-bottom: 2px solid var(--border); }
+.items-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.items-table tfoot td { padding: 12px; border-top: 2px solid var(--border); }
+.total-label { font-weight: 700; color: var(--text-secondary); }
+.total-val { font-weight: 800; font-size: 16px; color: var(--primary); }
+
+/* 🔄 View Switcher */
+.view-toggle {
+  display: flex;
+  background: var(--bg);
+  padding: 4px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+.toggle-btn {
+  background: none;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.toggle-btn.active {
+  background: white;
+  color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 📅 Pickup Badge on Table */
+.pickup-badge {
+  background: var(--primary-xlight);
+  color: var(--primary-dark);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 📅 Calendar Page Section */
+.calendar-wrapper {
+  margin-top: 16px;
+}
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.calendar-month-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+.cal-nav-btn {
+  background: white;
+  border: 2px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.cal-nav-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* 📅 Calendar Grid Container */
+.calendar-grid-container {
+  padding: 16px;
+}
+.calendar-week-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+.week-cell {
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+.calendar-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  gap: 8px;
+}
+
+/* 📅 Day Cells */
+.day-cell {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.2s;
+  min-height: 100px;
+}
+.day-cell:hover {
+  border-color: var(--primary-light);
+  background: white;
+}
+.day-cell.inactive-month {
+  opacity: 0.45;
+}
+.day-cell.has-orders {
+  background: #fcfefe;
+}
+.day-number {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text-secondary);
+  align-self: flex-end;
+}
+
+/* 📅 Mini Orders list inside Calendar Day cell */
+.day-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 6px;
+  flex-grow: 1;
+}
+.mini-order-item {
+  font-size: 11px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  transition: all 0.2s;
+  text-align: left;
+}
+.mini-order-item:hover {
+  transform: translateX(2px);
+  filter: brightness(0.95);
+}
+
+/* 📦 Mini Status Colors */
+.mini-order-item.status-pending {
+  background: #fef9e7;
+  color: #b78a00;
+  border-left: 3px solid #f1c40f;
+}
+.mini-order-item.status-shipping {
+  background: #ebf5fb;
+  color: #1a5276;
+  border-left: 3px solid #3498db;
+}
+.mini-order-item.status-completed {
+  background: #eafaf1;
+  color: #1e8449;
+  border-left: 3px solid #2ecc71;
+}
+
+/* 🏆 Pickups Highlight Text in Details Modal */
+.pickup-text-highlight {
+  background: #fff8e7;
+  color: #d4a300;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  border: 1px solid #ffe8b2;
+}
+
+/* 📌 Today's Pickups Agenda Card */
+.today-agenda-card {
+  margin-bottom: 24px;
+  border-top: 4px solid var(--primary);
+  padding: 20px;
+}
+.agenda-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed var(--border);
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+.agenda-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.agenda-icon {
+  font-size: 24px;
+  background: var(--primary-xlight);
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.agenda-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin: 0;
+}
+.agenda-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 2px 0 0 0;
+}
+.agenda-date-badge {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+/* 📌 Agenda List Grid */
+.agenda-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.agenda-item-box {
+  display: grid;
+  grid-template-columns: 100px 180px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.agenda-item-box:hover {
+  transform: translateX(4px);
+  border-color: var(--primary-light);
+  background: white;
+  box-shadow: var(--shadow-sm);
+}
+.agenda-time-pill {
+  background: var(--primary);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+.agenda-cust-info {
+  display: flex;
+  flex-direction: column;
+}
+.agenda-cust-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.agenda-cust-phone {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+.agenda-item-summary {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.agenda-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  padding: 14px 0;
+  font-weight: 600;
+}

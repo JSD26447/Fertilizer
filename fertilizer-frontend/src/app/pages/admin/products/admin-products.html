@@ -1,0 +1,96 @@
+<div class="page-content">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">🌿 จัดการสินค้า</h1>
+      <p class="page-sub">เพิ่ม แก้ไข หรือลบสินค้าในร้าน</p>
+    </div>
+    <button class="btn btn-primary" (click)="openAdd()">+ เพิ่มสินค้าใหม่</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>กำลังโหลด...</p>
+  </div>
+
+  <div class="card table-card fade-in" *ngIf="!loading">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>ชื่อสินค้า</th>
+          <th>หมวดหมู่</th>
+          <th>ราคา</th>
+          <th>สต็อก</th>
+          <th>จัดการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of products">
+          <td>{{ p.id }}</td>
+          <td>
+            <strong>{{ p.name }}</strong> <span *ngIf="p.isFeatured">⭐</span>
+            <br>
+            <small class="text-muted">{{ p.description }}</small>
+          </td>
+          <td><span class="badge badge-green">{{ p.category }}</span></td>
+          <td><strong>{{ formatPrice(p.price) }}</strong></td>
+          <td [class.low-stock]="p.stock < 10">{{ p.stock }} ชิ้น</td>
+          <td class="actions">
+            <button class="btn btn-outline btn-sm" (click)="openEdit(p)">✏️ แก้ไข</button>
+            <button class="btn btn-danger btn-sm" (click)="delete(p.id)">🗑️ ลบ</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="products.length === 0" class="empty">ยังไม่มีสินค้า</div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ editMode ? '✏️ แก้ไขสินค้า' : '+ เพิ่มสินค้าใหม่' }}</h2>
+      <button class="close-btn" (click)="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>ชื่อสินค้า *</label>
+        <input class="form-control" type="text" placeholder="ชื่อสินค้า" [(ngModel)]="form.name">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>ราคา (บาท) *</label>
+          <input class="form-control" type="number" min="0" [(ngModel)]="form.price">
+        </div>
+        <div class="form-group">
+          <label>จำนวนในสต็อก</label>
+          <input class="form-control" type="number" min="0" [(ngModel)]="form.stock">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>หมวดหมู่</label>
+        <select class="form-control" [(ngModel)]="form.category">
+          <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+        </select>
+      </div>
+      <div class="form-group" style="display: flex; align-items: center; gap: 8px; margin: 10px 0;">
+        <input type="checkbox" id="isFeatured" [(ngModel)]="form.isFeatured"
+          style="width: 20px; height: 20px; cursor: pointer;">
+        <label for="isFeatured" style="margin: 0; cursor: pointer; font-weight: 500;">🌟 ปักหมุดเป็นสินค้าแนะนำ</label>
+      </div>
+
+      <div class="form-group">
+        <label>คำอธิบาย</label>
+        <textarea class="form-control" rows="3" placeholder="รายละเอียดสินค้า"
+          [(ngModel)]="form.description"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="closeModal()">ยกเลิก</button>
+      <button class="btn btn-primary" [disabled]="saving || !form.name" (click)="save()">
+        {{ saving ? '⏳ กำลังบันทึก...' : '💾 บันทึก' }}
+      </button>
+    </div>
+  </div>
+</div>

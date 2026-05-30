@@ -1,0 +1,29 @@
+<div class="product-card">
+
+    <h2>
+        {{ product.name }}
+    </h2>
+
+    <p>
+        จำนวนคงเหลือ: {{ product.stock }}
+    </p>
+
+    <button class="add-btn" (click)="increaseStock()">
+
+        +
+
+    </button>
+
+    <button class="minus-btn" (click)="decreaseStock()">
+
+        -
+
+    </button>
+
+    <button class="delete-btn" (click)="deleteProduct()">
+
+        ลบสินค้า
+
+    </button>
+
+</div>

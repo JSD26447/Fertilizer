@@ -1,0 +1,172 @@
+<div class="page-content">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">📋 จัดการออเดอร์ & ตารางนัดรับ</h1>
+      <p class="page-sub">ดูข้อมูลรายการสั่งซื้อ ตารางวันนัดรับสินค้าของเกษตรกร</p>
+    </div>
+
+    <!-- 🔄 ปุ่มสวิตช์เปิดตาราง / ปฏิทิน -->
+    <div class="view-toggle">
+      <button class="toggle-btn" [class.active]="viewMode === 'table'" (click)="viewMode = 'table'">📋 ตารางออเดอร์</button>
+      <button class="toggle-btn" [class.active]="viewMode === 'calendar'" (click)="viewMode = 'calendar'">📅 ปฏิทินนัดรับปุ๋ย</button>
+    </div>
+  </div>
+
+  <!-- 📌 กระดานแจ้งงานด่วน: "วันนี้มีนัดรับกับใครบ้าง" (ช่วยให้คนขายเห็นคิววันนี้ได้ทันที) -->
+  <div class="today-agenda-card card fade-in">
+    <div class="agenda-header">
+      <div class="agenda-title-wrapper">
+        <span class="agenda-icon">🔔</span>
+        <div>
+          <h3>กระดานตารางนัดรับสินค้า "เฉพาะวันนี้"</h3>
+          <p class="agenda-sub">มีนัดส่งมอบปุ๋ยให้กับเกษตรกรทั้งหมด {{ todayOrders.length }} คิว</p>
+        </div>
+      </div>
+      <span class="agenda-date-badge">📅 วันนี้: {{ getTodayDateString() | date:'dd/MM/yyyy' }}</span>
+    </div>
+
+    <!-- แสดงคิวนัดวันนี้แยกตามกล่อง เรียงตามชั่วโมงนัดหมาย -->
+    <div class="agenda-grid" *ngIf="todayOrders.length > 0">
+      <div class="agenda-item-box" *ngFor="let o of todayOrders" (click)="viewDetail(o)">
+        <div class="agenda-time-pill">⏰ {{ o.pickupTime }} น.</div>
+        <div class="agenda-cust-info">
+          <strong class="agenda-cust-name">{{ o.customerName }}</strong>
+          <span class="agenda-cust-phone">📞 {{ o.customerPhone }}</span>
+        </div>
+        <div class="agenda-item-summary">
+          📦 ปุ๋ยรวม {{ o.items.length }} รายการ (ยอด: {{ formatPrice(o.totalPrice) }})
+        </div>
+        <div class="agenda-status-badge">
+          <span class="badge {{ getStatusClass(o.status) }}">{{ o.status }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- แสดงเมื่อวันนี้ไม่มีเกษตรกรนัดเข้ามาเลย -->
+    <div class="agenda-empty" *ngIf="todayOrders.length === 0">
+      🎉 วันนี้ไม่มีคิวนัดรับปุ๋ยที่หน้าร้านครับ
+    </div>
+  </div>
+
+  <!-- 🟢 โหมดตารางปกติ (Table View) -->
+  <div *ngIf="viewMode === 'table'">
+    <div class="filter-bar">
+      <button *ngFor="let s of statuses" class="filter-btn" [class.active]="filterStatus === s" (click)="setFilter(s)">{{ s }}</button>
+    </div>
+
+    <div *ngIf="loading" class="loading"><div class="spinner"></div><p>กำลังโหลด...</p></div>
+
+    <div class="card table-card fade-in" *ngIf="!loading">
+      <table class="data-table">
+        <thead>
+          <tr><th>#</th><th>ลูกค้า</th><th>เบอร์โทร</th><th>รายการ</th><th>นัดรับปุ๋ย</th><th>ยอดรวม</th><th>สถานะ</th><th>วันที่สั่ง</th><th>จัดการ</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let o of filtered">
+            <td><strong>#{{ o.id }}</strong></td>
+            <td>{{ o.customerName }}</td>
+            <td>{{ o.customerPhone }}</td>
+            <td>
+              <button class="link-btn" (click)="viewDetail(o)">ดูรายการ ({{ o.items.length || 0 }} รายการ)</button>
+            </td>
+            <td>
+              <span *ngIf="o.pickupDate" class="pickup-badge">
+                📅 {{ o.pickupDate | date:'dd/MM/yyyy' }} ⏰ {{ o.pickupTime }}
+              </span>
+              <span *ngIf="!o.pickupDate" class="text-muted">-</span>
+            </td>
+            <td><strong>{{ formatPrice(o.totalPrice) }}</strong></td>
+            <td><span class="badge {{ getStatusClass(o.status) }}">{{ o.status }}</span></td>
+            <td>{{ o.createdAt | date:'dd/MM/yy HH:mm' }}</td>
+            <td>
+              <select class="status-select" [(ngModel)]="o.status" (ngModelChange)="updateStatus(o, $event)">
+                <option value="รอดำเนินการ">รอดำเนินการ</option>
+                <option value="กำลังจัดส่ง">กำลังจัดส่ง</option>
+                <option value="จัดส่งแล้ว">จัดส่งแล้ว</option>
+                <option value="ยกเลิก">ยกเลิก</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="filtered.length === 0" class="empty">ไม่มีออเดอร์ในหมวดนี้</div>
+    </div>
+  </div>
+
+  <!-- 📅 โหมดปฏิทินนัดรับปุ๋ย (Calendar View) -->
+  <div *ngIf="viewMode === 'calendar'" class="calendar-wrapper fade-in">
+    <!-- ตัวนำทางเปลี่ยนเดือน -->
+    <div class="calendar-header">
+      <button class="cal-nav-btn" (click)="prevMonth()">◀ เดือนก่อน</button>
+      <h2 class="calendar-month-title">{{ getMonthName() }}</h2>
+      <button class="cal-nav-btn" (click)="nextMonth()">เดือนถัดไป ▶</button>
+    </div>
+
+    <!-- บอร์ดตารางวันที่นัดรับ -->
+    <div class="calendar-grid-container card">
+      <!-- หัวแถวสัปดาห์ -->
+      <div class="calendar-week-header">
+        <div class="week-cell" *ngFor="let day of weekDays">{{ day }}</div>
+      </div>
+
+      <!-- ช่องตารางวันที่ -->
+      <div class="calendar-days-grid">
+        <div *ngFor="let cell of calendarDays" 
+             class="day-cell" 
+             [class.inactive-month]="!cell.isCurrentMonth"
+             [class.has-orders]="cell.orders.length > 0">
+          
+          <span class="day-number">{{ cell.dayNum }}</span>
+          
+          <!-- แสดงรายการนัดรับในแต่ละวัน -->
+          <div class="day-orders-list">
+            <div *ngFor="let order of cell.orders" 
+                 class="mini-order-item" 
+                 [class.status-pending]="order.status === 'รอดำเนินการ'"
+                 [class.status-shipping]="order.status === 'กำลังจัดส่ง'"
+                 [class.status-completed]="order.status === 'จัดส่งแล้ว'"
+                 (click)="viewDetail(order)">
+              ⏰ <strong>{{ order.pickupTime }}</strong> - {{ order.customerName }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Detail Modal -->
+<div class="modal-overlay" *ngIf="selectedOrder" (click)="closeDetail()">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>📋 ออเดอร์ #{{ selectedOrder.id }}</h2>
+      <button class="close-btn" (click)="closeDetail()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="order-meta">
+        <div class="meta-item"><label>ชื่อลูกค้า:</label><span>{{ selectedOrder.customerName }}</span></div>
+        <div class="meta-item"><label>เบอร์โทร:</label><span>{{ selectedOrder.customerPhone }}</span></div>
+        <div class="meta-item" *ngIf="selectedOrder.pickupDate">
+          <label>📅 วันเวลานัดรับ:</label>
+          <span class="pickup-text-highlight">วันที่ {{ selectedOrder.pickupDate | date:'dd/MM/yyyy' }} เวลา {{ selectedOrder.pickupTime }} น.</span>
+        </div>
+        <div class="meta-item" *ngIf="selectedOrder.note"><label>หมายเหตุ:</label><span>{{ selectedOrder.note }}</span></div>
+        <div class="meta-item"><label>สถานะ:</label><span class="badge {{ getStatusClass(selectedOrder.status) }}">{{ selectedOrder.status }}</span></div>
+      </div>
+      <table class="items-table">
+        <thead><tr><th>สินค้า</th><th>ราคา/ชิ้น</th><th>จำนวน</th><th>รวม</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let item of selectedOrder.items">
+            <td>{{ item.productName }}</td>
+            <td>{{ formatPrice(item.unitPrice) }}</td>
+            <td>{{ item.quantity }}</td>
+            <td><strong>{{ formatPrice(item.unitPrice * item.quantity) }}</strong></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr><td colspan="3" class="total-label">ยอดรวมทั้งหมด</td><td class="total-val">{{ formatPrice(selectedOrder.totalPrice) }}</td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

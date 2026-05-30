@@ -1,0 +1,890 @@
+.header {
+  background: var(--primary-dark);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 32px;
+}
+
+.logo-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.logo-sub {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.header-vintage-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+.header-vintage-btn:hover {
+  transform: scale(1.06);
+}
+
+.header-vintage-btn:active {
+  transform: scale(0.96);
+}
+
+.header-btn-img {
+  height: 70px; /* Elegant uniform height that sits beautifully inside the top header */
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+}
+
+.cart-badge-badge {
+  position: absolute;
+  top: -4px;
+  right: 6px;
+  background: #e63946; /* Rich vintage red badge */
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, var(--primary-light) 100%);
+  color: white;
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+
+.hero-accent {
+  color: var(--accent);
+}
+
+.hero-desc {
+  font-size: 16px;
+  opacity: 0.9;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Wood table background wrapper - lock in place on scroll for ultra-premium effect */
+.home-page-bg {
+  width: 100%;
+  background-image: url('/images/bg-manu.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Locks wood planks in place during scrolling */
+  padding: 40px 0;
+  box-sizing: border-box;
+}
+
+/* Beautiful central parchment container that wraps the promotions, search, categories, and grids */
+.catalog-content-wrapper {
+  max-width: 1200px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
+  background-color: #f4edd9; /* Warmer, classic vintage ivory base color requested by user */
+  background-image: url('/images/parchment-bg.png'); /* High-resolution antique parchment paper texture! */
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #d0c5a9; /* Vintage warm bronze-grey border to frame parchment */
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(45, 38, 24, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  padding: 40px 32px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.main {
+  width: 100%;
+  padding: 24px 0 0 0;
+  margin: 0;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 36px;
+  width: 100%;
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 26px;
+  border: 3px solid #8c764e;
+  background: linear-gradient(to bottom, #2d261a 0%, #1e1910 100%);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.5), 0 4px 10px rgba(45, 38, 24, 0.15);
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #d9c39e;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  padding: 0 16px 0 52px;
+  color: #faf7ed; /* Beautiful warm white/cream text color */
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+  color: #8c826e; /* Soft vintage gold-grey placeholder */
+  font-style: normal;
+  opacity: 0.8;
+}
+
+.categories {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.cat-btn {
+  padding: 10px 26px;
+  border-radius: 24px;
+  border: 2px solid #e1dac6;
+  background-color: #f7f4e9;
+  color: #5a5240;
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(45, 38, 24, 0.06);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+}
+
+.cat-btn:hover {
+  background-color: #ebe6d5;
+  border-color: #c5beaa;
+  transform: translateY(-1px);
+}
+
+.cat-btn.active {
+  background: linear-gradient(to bottom, #302a1d 0%, #221d14 100%);
+  border-color: #8c764e;
+  color: #faf7ed;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(45, 38, 24, 0.15);
+}
+
+.cat-btn.active:hover {
+  background: linear-gradient(to bottom, #3a3325 0%, #292318 100%);
+}
+
+.filter-icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid #8c764e;
+  background: linear-gradient(to bottom, #ebe5d5 0%, #dcd5be 100%);
+  color: #3e2723;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(45, 38, 24, 0.1);
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.filter-icon-btn:hover {
+  background: linear-gradient(to bottom, #f3ede0 0%, #e6dfcb 100%);
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 4px 8px rgba(45, 38, 24, 0.15);
+}
+
+.filter-icon-btn:active {
+  transform: translateY(1px);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 290px);
+  justify-content: center;
+  gap: 32px 24px;
+}
+
+.product-card {
+  width: 290px;
+  height: 420px;
+  background-color: #f4edd9; /* Richer, classic vintage ivory base color */
+  background-image: 
+    linear-gradient(to bottom, rgba(244, 237, 217, 0) 0%, rgba(244, 237, 217, 0) 10%, rgba(244, 237, 217, 1) 48%, rgba(244, 237, 217, 1) 100%), 
+    url('/images/bg-manu.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  border: 1px solid #d0c5a9; /* Slightly warmer border to blend with parchment wrapper */
+  border-radius: 18px;
+  position: relative;
+  box-shadow: 0 8px 22px rgba(45, 38, 24, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  box-sizing: border-box;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  border-color: #c5beaa;
+  box-shadow: 0 16px 32px rgba(45, 38, 24, 0.16), inset 0 1px 0 #ffffff;
+}
+
+/* Curved Dark Beige/Khaki top area - hidden since we are using bg-manu.png on the card itself */
+.product-card-header {
+  display: none;
+}
+
+/* Translucent Top-Right Share Button inside the Dark Curved Area */
+.top-share-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fffff0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 4;
+  transition: all 0.2s ease;
+}
+
+.top-share-btn:hover {
+  background: rgba(255, 255, 255, 0.38);
+  transform: scale(1.08);
+}
+
+/* Vertical Three-dot Menu on the right side of the circle */
+.more-btn {
+  position: absolute;
+  top: 104px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: #7d7d7d;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 4;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.more-btn:hover {
+  color: #333;
+  transform: scale(1.15);
+}
+
+/* Center Product Circular Frame */
+.product-img-container {
+  position: absolute;
+  top: -30px; /* Pull it up to sit perfectly over the top card border */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.product-circle {
+  width: 240px; /* Enlarged to 240px to compensate for the transparent margins in your PNG files! */
+  height: 240px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-circle {
+  transform: scale(1.04) rotate(1deg);
+}
+
+.product-img-real {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensures the circular icon displays fully in high resolution without clipping */
+}
+
+.product-emoji-vintage {
+  font-size: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+/* Product Body & Spacing Details */
+.product-body {
+  margin-top: 155px;
+  height: calc(100% - 155px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 22px 18px 22px;
+  box-sizing: border-box;
+}
+
+.badge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+  width: 100%;
+}
+
+.badge-vintage {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Noto Sans Thai', sans-serif;
+}
+
+.badge-vintage.badge-green {
+  background-color: #e6ebdd;
+  color: #4e5a3d;
+  border: 1px solid rgba(78, 90, 61, 0.15);
+}
+
+.badge-vintage.badge-blue {
+  background-color: #dbe6eb;
+  color: #3d4e5a;
+  border: 1px solid rgba(61, 78, 90, 0.15);
+}
+
+.badge-vintage.badge-yellow {
+  background-color: #ebe5dd;
+  color: #5a4e3d;
+  border: 1px solid rgba(90, 78, 61, 0.15);
+}
+
+/* Icons Group in Badge Row */
+.icons-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.action-icon-btn {
+  background: transparent;
+  border: none;
+  color: #8c8c8c;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.action-icon-btn:hover {
+  color: #444;
+  transform: scale(1.15);
+}
+
+.fav-heart svg {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+}
+
+.wax-seal {
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle, #e63946 0%, #b51717 100%);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 1px 3px rgba(181, 23, 23, 0.4), inset 0 1px 1px rgba(255,255,255,0.4);
+  border: 1px dashed rgba(255,255,255,0.45);
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.wax-seal:hover {
+  transform: scale(1.1) rotate(10deg);
+}
+
+/* Vintage Typography styles */
+.product-name-vintage {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 2px 0;
+  line-height: 1.2;
+  text-align: left;
+  font-family: 'Noto Sans Thai', sans-serif;
+}
+
+.product-desc-vintage {
+  font-size: 12px;
+  color: #555555;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  text-align: left;
+  min-height: 36px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Product Footer with Price & Stock details */
+.product-footer-vintage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  margin-top: auto;
+  width: 100%;
+}
+
+.product-price-vintage {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2b2b2b;
+}
+
+.product-stock-vintage {
+  font-size: 11px;
+  font-weight: 600;
+  color: #5a5d42;
+  background-color: #e5e7d6;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(90, 93, 66, 0.2);
+}
+
+.product-stock-vintage.out {
+  color: #8c2e2e;
+  background-color: #f7dddd;
+  border-color: rgba(140, 46, 46, 0.2);
+}
+
+/* Wooden plank button using button-manu.png as a pure transparent asset */
+.add-btn-vintage {
+  width: 100%;
+  height: 60px; /* Beautiful height to fully enclose the wood button */
+  background-image: url('/images/button-manu.png');
+  background-size: 112% auto; /* Perfect scaling to span the card inner width */
+  background-position: center 51.5%; /* Centers exactly on the vertical wood portion of the asset */
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  box-shadow: none; /* Removes the rectangular outer button box-shadow completely! */
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.15), filter 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-btn-vintage:hover:not(:disabled) {
+  transform: scale(1.04);
+  filter: brightness(1.08) drop-shadow(0 6px 12px rgba(45, 38, 24, 0.25));
+}
+
+.add-btn-vintage:active:not(:disabled) {
+  transform: scale(0.97);
+  filter: brightness(0.95) drop-shadow(0 2px 4px rgba(45, 38, 24, 0.15));
+}
+
+.add-btn-vintage:disabled {
+  filter: grayscale(90%) opacity(50%);
+  cursor: not-allowed;
+}
+
+.add-btn-vintage.added {
+  filter: hue-rotate(65deg) brightness(1.05);
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cart-icon {
+  font-size: 15px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.loading-state,
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.footer {
+  background: var(--primary-dark);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  margin-top: 40px;
+}
+
+/* 📢 ส่วนปรับแต่งการ์ดแสดงข่าวสารโปรโมชั่นหน้าร้าน */
+/* 📢 ส่วนปรับแต่งการ์ดแสดงข่าวสารโปรโมชั่นหน้าร้านสไตล์วินเทจบอร์ด */
+.promotions-section {
+  width: 100%;
+  max-width: 720px; /* Elegant compact width, no longer stretches infinity! */
+  margin: 0 auto 32px;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.promo-banner {
+  background: #fdfbf7; /* Beautiful light cream parchment paper */
+  border-radius: 16px;
+  border: 1px solid #e2dbcb;
+  border-left: 5px solid #8c764e; /* Thick premium brass-gold vertical left accent line */
+  box-shadow: 0 6px 18px rgba(45, 38, 24, 0.07);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+}
+
+.promo-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(45, 38, 24, 0.12);
+  border-color: #d2c8b4;
+  border-left-color: #a18a5e;
+}
+
+.promo-icon {
+  width: 140px;
+  height: 140px;
+  margin: -40px -38px -40px -38px; /* Negative margins to tuck empty canvas spaces out, making the megaphone large and satisfying! */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  animation: pulse 2.5s infinite ease-in-out;
+}
+
+.promo-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.promo-content {
+  flex: 1;
+}
+
+.promo-badge {
+  background-color: #b85c5c; /* Soft Crimson/Terracotta red badge exactly like the mockup! */
+  color: white;
+  padding: 3px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Noto Sans Thai', sans-serif;
+  letter-spacing: 0.3px;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+.promo-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2e261a; /* Dark charcoal brown */
+  font-family: 'Noto Sans Thai', sans-serif;
+  margin: 4px 0;
+}
+
+.promo-desc {
+  font-size: 13px;
+  color: #6d624e; /* Soft vintage grey-brown */
+  font-family: 'Noto Sans Thai', sans-serif;
+  line-height: 1.4;
+  margin: 0;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 📍 ส่วนแผนที่และข้อมูลร้าน */
+.map-section {
+  background: linear-gradient(to bottom, #f9f5ec 0%, #f0ead8 100%);
+  border-top: 3px solid #8c764e;
+  padding: 56px 24px;
+}
+
+.map-section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.map-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.map-icon {
+  font-size: 40px;
+  filter: drop-shadow(0 2px 4px rgba(140, 118, 78, 0.4));
+  animation: pulse 2.5s infinite ease-in-out;
+}
+
+.map-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2e261a;
+  font-family: 'Noto Sans Thai', sans-serif;
+  margin: 0;
+}
+
+.map-subtitle {
+  font-size: 14px;
+  color: #7a6e58;
+  margin: 4px 0 0 0;
+  font-family: 'Noto Sans Thai', sans-serif;
+}
+
+.map-content {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  align-items: start;
+}
+
+.map-embed-wrapper {
+  width: 100%;
+  height: 420px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 3px solid #d0c5a9;
+  box-shadow: 0 12px 32px rgba(45, 38, 24, 0.18);
+}
+
+.map-embed-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.map-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #fdfbf7;
+  border: 1px solid #e2dbcb;
+  border-left: 4px solid #8c764e;
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 4px 10px rgba(45, 38, 24, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.info-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 6px 16px rgba(45, 38, 24, 0.1);
+}
+
+.info-icon {
+  font-size: 26px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.info-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8c764e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Noto Sans Thai', sans-serif;
+  margin-bottom: 3px;
+}
+
+.info-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2e261a;
+  font-family: 'Noto Sans Thai', sans-serif;
+  line-height: 1.5;
+}
+
+.map-open-btn {
+  display: block;
+  text-align: center;
+  background: linear-gradient(to bottom, #302a1d 0%, #221d14 100%);
+  color: #faf7ed;
+  font-family: 'Noto Sans Thai', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 24px;
+  border-radius: 14px;
+  border: 2px solid #8c764e;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(45, 38, 24, 0.25), inset 0 1px 0 rgba(255,255,255,0.08);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  margin-top: 4px;
+}
+
+.map-open-btn:hover {
+  background: linear-gradient(to bottom, #3d3426 0%, #2b2418 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(45, 38, 24, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  border-color: #a18a5e;
+}
+
+.map-open-btn:active {
+  transform: translateY(0px);
+  box-shadow: 0 2px 6px rgba(45, 38, 24, 0.2);
+}
+
+/* Responsive map section */
+@media (max-width: 900px) {
+  .map-content {
+    grid-template-columns: 1fr;
+  }
+
+  .map-embed-wrapper {
+    height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-title {
+    font-size: 22px;
+  }
+
+  .map-embed-wrapper {
+    height: 260px;
+  }
+}

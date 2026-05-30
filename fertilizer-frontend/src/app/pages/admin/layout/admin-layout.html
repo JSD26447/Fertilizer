@@ -1,0 +1,39 @@
+<div class="admin-shell">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">🌿</span>
+      <div>
+        <div class="logo-name">ร้านปุ๋ยชาวนา</div>
+        <div class="logo-role">แผงควบคุม</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="nav-item" routerLink="/admin/dashboard" routerLinkActive="active">
+        <span>📊</span> แดชบอร์ด
+      </a>
+      <a class="nav-item" routerLink="/admin/products" routerLinkActive="active">
+        <span>🌿</span> จัดการสินค้า
+      </a>
+      <a class="nav-item" routerLink="/admin/orders" routerLinkActive="active">
+        <span>📋</span> ออเดอร์
+      </a>
+
+      <!-- 📢 เมนูแผงควบคุมโปรโมชั่นหน้าใหม่ที่เราทำขึ้นมา -->
+      <a class="nav-item" routerLink="/admin/promotions" routerLinkActive="active">
+        <span>📢</span> โปรโมชั่น & ข่าวสาร
+      </a>
+
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <span class="user-avatar">👤</span>
+        <span class="user-name">{{ username }}</span>
+      </div>
+      <button class="nav-item logout-btn" (click)="logout()"><span>🚪</span> ออกจากระบบ</button>
+      <button class="nav-item store-btn" (click)="goHome()"><span>🏪</span> ดูหน้าร้าน</button>
+    </div>
+  </aside>
+  <main class="admin-main">
+    <router-outlet></router-outlet>
+  </main>
+</div>
