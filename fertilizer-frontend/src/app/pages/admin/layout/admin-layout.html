@@ -1,5 +1,11 @@
 <div class="admin-shell">
-  <aside class="sidebar">
+  <!-- 📱 Hamburger toggle button (mobile only) -->
+  <button class="sidebar-toggle" (click)="toggleSidebar()" aria-label="เปิดเมนู">☰</button>
+
+  <!-- 📱 Overlay to close sidebar on mobile -->
+  <div class="sidebar-overlay" [class.visible]="sidebarOpen" (click)="closeSidebar()"></div>
+
+  <aside class="sidebar" [class.open]="sidebarOpen">
     <div class="sidebar-logo">
       <span class="logo-icon">🌿</span>
       <div>
@@ -8,18 +14,18 @@
       </div>
     </div>
     <nav class="sidebar-nav">
-      <a class="nav-item" routerLink="/admin/dashboard" routerLinkActive="active">
+      <a class="nav-item" routerLink="/admin/dashboard" routerLinkActive="active" (click)="closeSidebar()">
         <span>📊</span> แดชบอร์ด
       </a>
-      <a class="nav-item" routerLink="/admin/products" routerLinkActive="active">
+      <a class="nav-item" routerLink="/admin/products" routerLinkActive="active" (click)="closeSidebar()">
         <span>🌿</span> จัดการสินค้า
       </a>
-      <a class="nav-item" routerLink="/admin/orders" routerLinkActive="active">
+      <a class="nav-item" routerLink="/admin/orders" routerLinkActive="active" (click)="closeSidebar()">
         <span>📋</span> ออเดอร์
       </a>
 
       <!-- 📢 เมนูแผงควบคุมโปรโมชั่นหน้าใหม่ที่เราทำขึ้นมา -->
-      <a class="nav-item" routerLink="/admin/promotions" routerLinkActive="active">
+      <a class="nav-item" routerLink="/admin/promotions" routerLinkActive="active" (click)="closeSidebar()">
         <span>📢</span> โปรโมชั่น & ข่าวสาร
       </a>
 

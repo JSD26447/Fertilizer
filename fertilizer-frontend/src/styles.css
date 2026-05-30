@@ -179,6 +179,7 @@ input, select, textarea { font-family: inherit; outline: none; }
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 16px;
 }
 .modal-box {
   width: 100%;
@@ -252,4 +253,43 @@ input, select, textarea { font-family: inherit; outline: none; }
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.45) !important;
   margin-top: 6px !important;
   font-family: 'Noto Sans Thai', sans-serif !important;
+}
+
+/* =============================
+   📱 GLOBAL MOBILE RESPONSIVE
+   ============================= */
+@media (max-width: 480px) {
+  /* Modals */
+  .modal-overlay {
+    padding: 12px;
+  }
+  .modal-header {
+    padding: 16px;
+  }
+  .modal-header h2 {
+    font-size: 18px;
+  }
+  .modal-body {
+    padding: 16px;
+    max-height: calc(100vh - 140px);
+  }
+  .modal-footer {
+    padding: 12px 16px;
+    flex-direction: column-reverse;
+  }
+  .modal-footer .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 12px 16px;
+  }
+  
+  /* Form inputs */
+  .form-control {
+    padding: 10px 14px;
+    font-size: 14px !important;
+  }
 }

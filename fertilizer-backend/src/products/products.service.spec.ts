@@ -1,32 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import { ProductsService } from './products.service';
 
-@Injectable()
-export class ProductsService {
-  private products = [
-    { id: 1, name: 'ปุ๋ยคอก', stock: 50 },
-    { id: 2, name: 'ปุ๋ยหมัก', stock: 20 },
-    { id: 3, name: 'กระสอบเปล่า', stock: 100 },
-  ];
+describe('ProductsService', () => {
+  let service: ProductsService;
 
-  findAll() {
-    return this.products;
-  }
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [ProductsService],
+    }).compile();
 
-  create(product: { id: number; name: string; stock: number }) {
-    this.products.push(product);
-    return product;
-  }
+    service = module.get<ProductsService>(ProductsService);
+  });
 
-  updateStock(id: number, stock: number) {
-    const product = this.products.find(p => p.id === id);
-    if (product) {
-      product.stock = stock;
-    }
-    return product;
-  }
-
-  delete(id: number) {
-    this.products = this.products.filter(p => p.id !== id);
-    return { deletedId: id };
-  }
-}
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});

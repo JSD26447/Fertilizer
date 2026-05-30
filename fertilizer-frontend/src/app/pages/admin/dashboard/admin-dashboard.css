@@ -34,3 +34,58 @@
 .data-table th { text-align: left; padding: 10px 14px; background: var(--bg); color: var(--text-secondary); font-weight: 600; border-bottom: 2px solid var(--border); }
 .data-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); }
 .data-table tr:hover td { background: #f9fffe; }
+
+/* =============================
+   📱 DASHBOARD MOBILE RESPONSIVE
+   ============================= */
+@media (max-width: 768px) {
+  .dash-page {
+    padding: 20px 16px;
+  }
+  .dash-title {
+    font-size: 24px;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .stat-val {
+    font-size: 26px;
+  }
+  .stat-icon {
+    font-size: 32px;
+  }
+  .recent-section {
+    padding: 20px 16px;
+  }
+  .section-title {
+    font-size: 18px;
+  }
+  /* Make table horizontally scrollable */
+  .table-card {
+    overflow-x: auto;
+  }
+  .data-table {
+    min-width: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dash-page {
+    padding: 60px 12px 16px; /* top padding for hamburger button */
+  }
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .stat-card {
+    padding: 16px 12px;
+  }
+  .stat-val {
+    font-size: 22px;
+  }
+  .stat-label {
+    font-size: 12px;
+  }
+}
+

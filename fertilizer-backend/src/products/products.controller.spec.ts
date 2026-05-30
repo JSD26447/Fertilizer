@@ -1,27 +1,18 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch } from '@nestjs/common';
-import { ProductsService } from './products.service';
+import { Test, TestingModule } from '@nestjs/testing';
+import { ProductsController } from './products.controller';
 
-@Controller('products')
-export class ProductsController {
-  constructor(private readonly productsService: ProductsService) { }
+describe('ProductsController', () => {
+  let controller: ProductsController;
 
-  @Get()
-  getAll() {
-    return this.productsService.findAll();
-  }
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [ProductsController],
+    }).compile();
 
-  @Post()
-  create(@Body() body: { id: number; name: string; stock: number }) {
-    return this.productsService.create(body);
-  }
+    controller = module.get<ProductsController>(ProductsController);
+  });
 
-  @Patch(':id')
-  updateStock(@Param('id') id: string, @Body() body: { stock: number }) {
-    return this.productsService.updateStock(Number(id), body.stock);
-  }
-
-  @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.productsService.delete(Number(id));
-  }
-}
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});

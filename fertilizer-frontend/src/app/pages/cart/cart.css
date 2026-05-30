@@ -439,6 +439,11 @@ textarea.form-control {
   font-family: 'Noto Sans Thai', sans-serif;
 }
 
+/* =============================
+   📱 MOBILE RESPONSIVE STYLES
+   ============================= */
+
+/* Tablet (≤992px) */
 @media (max-width: 992px) {
   .cart-layout {
     grid-template-columns: 1fr;
@@ -446,5 +451,112 @@ textarea.form-control {
   }
   .checkout-form {
     position: static;
+  }
+}
+
+/* Tablet (≤768px) */
+@media (max-width: 768px) {
+  .cart-page-bg {
+    padding: 24px 0;
+    background-attachment: scroll;
+  }
+  .page-wrapper {
+    padding: 0 16px;
+  }
+  .page-header {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .page-title {
+    font-size: 24px;
+  }
+  .cart-items {
+    padding: 20px 16px;
+  }
+  .checkout-form {
+    padding: 20px 16px;
+  }
+  .cart-item {
+    gap: 12px;
+    padding: 16px 0;
+  }
+  .item-name {
+    font-size: 15px;
+  }
+  .item-total {
+    font-size: 16px;
+    min-width: 90px;
+  }
+  .cart-total {
+    font-size: 17px;
+  }
+  .total-price {
+    font-size: 22px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .section-title {
+    font-size: 18px;
+  }
+  .success-card {
+    padding: 36px 24px;
+    margin: 32px auto;
+  }
+  .success-card h2 {
+    font-size: 24px;
+  }
+}
+
+/* Mobile (≤480px) */
+@media (max-width: 480px) {
+  .cart-item {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .item-info {
+    width: 100%;
+    flex: 0 0 100%;
+  }
+  .item-qty {
+    flex: 1;
+  }
+  .item-total {
+    flex: 1;
+    text-align: right;
+    min-width: unset;
+    font-size: 15px;
+  }
+  .remove-btn {
+    font-size: 18px;
+  }
+  .cart-total {
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 15px;
+  }
+  .total-price {
+    font-size: 20px;
+  }
+  .page-title {
+    font-size: 20px;
+  }
+  .back-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  .success-card {
+    padding: 28px 16px;
+  }
+  .success-icon {
+    font-size: 56px;
+  }
+  .success-card h2 {
+    font-size: 20px;
+  }
+  .success-card p {
+    font-size: 14px;
   }
 }

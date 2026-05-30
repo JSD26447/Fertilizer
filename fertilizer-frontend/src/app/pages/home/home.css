@@ -888,3 +888,184 @@
     height: 260px;
   }
 }
+
+/* =============================
+   📱 MOBILE RESPONSIVE STYLES
+   ============================= */
+
+/* Tablet (≤768px) */
+@media (max-width: 768px) {
+  /* Header */
+  .header-inner {
+    padding: 10px 16px;
+  }
+  .logo-title {
+    font-size: 16px;
+  }
+  .logo-sub {
+    font-size: 11px;
+  }
+  .header-btn-img {
+    height: 52px;
+  }
+  .header-actions {
+    gap: 8px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 40px 16px;
+  }
+  .hero-title {
+    font-size: 28px;
+  }
+  .hero-desc {
+    font-size: 14px;
+  }
+
+  /* Catalog wrapper */
+  .catalog-content-wrapper {
+    width: calc(100% - 24px);
+    padding: 24px 16px;
+    border-radius: 16px;
+  }
+
+  /* Background padding */
+  .home-page-bg {
+    padding: 24px 0;
+    background-attachment: scroll; /* Fix parallax flicker on mobile */
+  }
+
+  /* Products grid — 2 columns on tablet */
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 12px;
+  }
+  .product-card {
+    width: 100%;
+    height: 380px;
+  }
+  .product-circle {
+    width: 200px;
+    height: 200px;
+  }
+  .product-body {
+    margin-top: 130px;
+    height: calc(100% - 130px);
+    padding: 0 14px 14px 14px;
+  }
+  .product-name-vintage {
+    font-size: 18px;
+  }
+  .product-price-vintage {
+    font-size: 18px;
+  }
+
+  /* Promotions */
+  .promo-banner {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  .promo-icon {
+    width: 100px;
+    height: 100px;
+    margin: -28px -24px -28px -28px;
+  }
+  .promotions-section {
+    max-width: 100%;
+  }
+
+  /* Map section */
+  .map-section {
+    padding: 36px 16px;
+  }
+  .map-title {
+    font-size: 22px;
+  }
+}
+
+/* Mobile (≤480px) */
+@media (max-width: 480px) {
+  /* Header — smaller logo & buttons */
+  .header-inner {
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+  }
+  .logo {
+    justify-content: center;
+    text-align: center;
+  }
+  .header-actions {
+    justify-content: center;
+    width: 100%;
+  }
+  .logo-icon {
+    font-size: 24px;
+  }
+  .logo-title {
+    font-size: 16px;
+  }
+  .logo-sub {
+    font-size: 11px;
+  }
+  .header-btn-img {
+    height: 48px;
+  }
+  .cart-badge-badge {
+    font-size: 11px;
+    min-width: 18px;
+    height: 18px;
+  }
+
+  /* Hero */
+  .hero-title {
+    font-size: 22px;
+  }
+  .hero-desc {
+    font-size: 13px;
+  }
+
+  /* Catalog wrapper */
+  .catalog-content-wrapper {
+    width: calc(100% - 16px);
+    padding: 16px 12px;
+    border-radius: 12px;
+  }
+
+  /* Products grid — 1 column on small phones */
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .product-card {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    height: 400px;
+  }
+
+  /* Categories */
+  .cat-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  /* Promo banner stacks */
+  .promo-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 16px;
+    gap: 8px;
+  }
+  .promo-icon {
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+  }
+
+  /* Map */
+  .map-embed-wrapper {
+    height: 240px;
+  }
+}
