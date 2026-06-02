@@ -101,4 +101,9 @@ export class ProductApiService {
     return this.http.delete(`${this.apiUrl}/promotions/${id}`);
   }
 
+  // 🤖 5. บริการส่งคำถามไปยังผู้ช่วย AI (RAG)
+  askAi(message: string): Observable<{ reply: string }> {
+    return this.http.post<{ reply: string }>(`${this.apiUrl}/ai/chat`, { message });
+  }
+
 }

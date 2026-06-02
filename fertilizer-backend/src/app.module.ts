@@ -13,6 +13,7 @@ import { OrderItem } from './orders/order-item.entity';
 import { SeedService } from './seed.service';
 import { PomotionModule } from './pomotion/pomotion.module';
 import { Promotion } from './pomotion/pomotion.entity';
+import { AiModule } from './ai/ai.module';
 
 
 @Module({
@@ -37,6 +38,7 @@ import { Promotion } from './pomotion/pomotion.entity';
     AuthModule,
     OrdersModule,
     PomotionModule,
+    AiModule,
   ],
   controllers: [AppController],
   providers: [AppService, SeedService],

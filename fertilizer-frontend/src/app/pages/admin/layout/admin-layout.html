@@ -42,4 +42,68 @@
   <main class="admin-main">
     <router-outlet></router-outlet>
   </main>
+
+  <!-- 🤖 หน้าต่าง AI Chatbot อัจฉริยะ (Floating Widget) -->
+  <div class="ai-chatbot-container" [class.active]="chatOpen">
+    <!-- ปุ่มสำหรับย่อ/ขยายหน้าต่างแชท -->
+    <button class="ai-chat-toggle-btn" (click)="toggleChat()" [class.unread]="hasUnread">
+      <span class="btn-icon">🤖</span>
+      <span class="btn-text">ถามน้องปุ๋ย AI</span>
+      <span class="unread-dot" *ngIf="hasUnread"></span>
+    </button>
+
+    <!-- กล่องหน้าต่างสนทนา AI -->
+    <div class="ai-chat-window" *ngIf="chatOpen">
+      <!-- หัวหน้าต่าง (Header) ดีไซน์พรีเมียม -->
+      <div class="ai-chat-header">
+        <div class="ai-avatar-info">
+          <span class="ai-header-avatar">🤖</span>
+          <div>
+            <div class="ai-header-title">น้องปุ๋ย AI 🌿</div>
+            <div class="ai-header-subtitle">ผู้ช่วยแอดมินคนเก่ง • ออนไลน์</div>
+          </div>
+        </div>
+        <button class="ai-close-btn" (click)="toggleChat()">×</button>
+      </div>
+
+      <!-- พื้นที่แสดงประวัติข้อความ (Message Body) -->
+      <div class="ai-chat-body" #chatBody>
+        <div class="ai-message-wrapper" *ngFor="let msg of chatMessages" [class.user]="msg.isUser">
+          <div class="ai-message-avatar" *ngIf="!msg.isUser">🤖</div>
+          <div class="ai-message-bubble">
+            <div class="ai-message-text" [innerHTML]="msg.text"></div>
+            <span class="ai-message-time">{{ msg.time }}</span>
+          </div>
+        </div>
+
+        <!-- ตัวแสดงสถานะกำลังพิมพ์ (Typing Indicator) -->
+        <div class="ai-message-wrapper" *ngIf="aiLoading">
+          <div class="ai-message-avatar">🤖</div>
+          <div class="ai-message-bubble ai-typing-bubble">
+            <div class="typing-indicator">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- แถบปุ่มคำแนะนำด่วน (Quick Suggestion Chips) -->
+      <div class="ai-chat-suggestions">
+        <button class="suggestion-chip" *ngFor="let suggestion of chatSuggestions" (click)="sendSuggestion(suggestion)">
+          {{ suggestion }}
+        </button>
+      </div>
+
+      <!-- แถบป้อนข้อมูลรับส่งข้อความ (Footer Input) -->
+      <div class="ai-chat-footer">
+        <input type="text" class="ai-chat-input" placeholder="พิมพ์คำถามถึงสต๊อกปุ๋ย หรือคิวนัดรับ..."
+          [(ngModel)]="chatInputText" (keyup.enter)="sendChatMessage()" />
+        <button class="ai-send-btn" (click)="sendChatMessage()">
+          <span>ส่ง</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
